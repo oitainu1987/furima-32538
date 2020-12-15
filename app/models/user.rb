@@ -4,19 +4,21 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :nickname, presence: true
-  validates :email, presence: true, uniqueness: { case_sensitive: false }
+  with_options presence: true do
+    validates :nickname
+    validates :email, uniqueness: { case_sensitive: false }
 
-  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
-  validates_format_of :password, with: PASSWORD_REGEX
+    validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i }
 
-  NAME_REGEX = /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/.freeze
-  validates_format_of :first_name, with: NAME_REGEX, presence: true
-  validates_format_of :family_name, with: NAME_REGEX, presence: true
+    with_options format: { with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/ } do
+      validates :first_name
+      validates :family_name
+    end
 
-  KANA_REGEX = /\A[ァ-ヶー－]+\z/.freeze
-  validates_format_of :first_name_kana, with: KANA_REGEX, presence: true
-  validates_format_of :family_name_kana, with: KANA_REGEX, presence: true
-
-  validates :birth_day, presence: true
+    with_options format: { with: /\A[ァ-ヶー－]+\z/ } do
+      validates :first_name_kana
+      validates :family_name_kana
+    end
+    validates :birth_day
+  end
 end
