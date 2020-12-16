@@ -1,4 +1,4 @@
-class Period < ActiveHash::Base 
+class Period < ActiveHash::Base
   self.data = [
     { id: 1, date: '--' },
     { id: 2, date: '1~2日で発送' },
@@ -8,5 +8,4 @@ class Period < ActiveHash::Base
 
   include ActiveHash::Associations
   has_many :items
-
 end
