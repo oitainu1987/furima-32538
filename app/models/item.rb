@@ -6,12 +6,14 @@ class Item < ApplicationRecord
   belongs_to :area
   belongs_to :period
   belongs_to :user
+  has_one_attached :image
 
 
   with_options presence: true do
     validates :item_name
     validates :overview
     validates :price
+    validates :image
   end
 
   with_options numericality: { other_than: 1 } do
