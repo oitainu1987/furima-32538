@@ -29,27 +29,27 @@ RSpec.describe Item, type: :model do
           expect(@item.errors.full_messages).to include("Overview can't be blank")
         end
         it 'category_idが1だと出品できない' do
-          @item.category_id = '1'
+          @item.category_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include('Category must be other than 1')
         end
         it 'status_idが1だと出品できない' do
-          @item.status_id = '1'
+          @item.status_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include('Status must be other than 1')
         end
         it 'delivery_fee_idが1だと出品できない' do
-          @item.delivery_fee_id = '1'
+          @item.delivery_fee_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include('Delivery fee must be other than 1')
         end
         it 'area_idが1だと出品できない' do
-          @item.area_id = '1'
+          @item.area_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include('Area must be other than 1')
         end
         it 'period_idが1だと出品できない' do
-          @item.period_id = '1'
+          @item.period_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include('Period must be other than 1')
         end
