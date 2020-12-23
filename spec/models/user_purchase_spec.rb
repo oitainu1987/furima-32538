@@ -46,6 +46,16 @@ RSpec.describe UserPurchase, type: :model do
           @user_purchase.valid?
           expect(@user_purchase.errors.full_messages).to include("Token can't be blank")
         end
+        it 'user_id空だと保存できないこと' do
+          @user_purchase.user_id = ''
+          @user_purchase.valid?
+          expect(@user_purchase.errors.full_messages).to include("User can't be blank")
+        end
+        it 'item_idが空だと保存できないこと' do
+          @user_purchase.item_id = ''
+          @user_purchase.valid?
+          expect(@user_purchase.errors.full_messages).to include("Item can't be blank")
+        end
         it 'postal_codeにはハイフンがないと保存できないこと' do
           @user_purchase.postal_code = '2233344'
           @user_purchase.valid?
