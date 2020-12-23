@@ -61,8 +61,8 @@ RSpec.describe UserPurchase, type: :model do
           @user_purchase.valid?
           expect(@user_purchase.errors.full_messages).to include('Postal code is invalid')
         end
-        it 'telは１０桁以下では保存できないこと' do
-          @user_purchase.tel = '0900001111'
+        it 'telは１２桁以上では保存できないこと' do
+          @user_purchase.tel = '090011112222'
           @user_purchase.valid?
           expect(@user_purchase.errors.full_messages).to include('Tel is invalid')
         end
