@@ -71,6 +71,11 @@ RSpec.describe UserPurchase, type: :model do
           @user_purchase.valid?
           expect(@user_purchase.errors.full_messages).to include('Tel is invalid')
         end
+        it '英数混合では登録できないこと' do
+          @user_purchase.tel = 'n9000001111'
+          @user_purchase.valid?
+          expect(@user_purchase.errors.full_messages).to include('Tel is invalid')
+        end
       end
     end
   end
