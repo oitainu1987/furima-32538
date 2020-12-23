@@ -7,7 +7,7 @@ FactoryBot.define do
     building { '横浜はいつ101' }
     tel { '09011223344' }
     token { 'tok_absdefghijk00000000000000000' }
-    user_id { 1 }
-    item_id { 1 }
+    association :user
+    association :item
   end
 end

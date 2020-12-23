@@ -4,7 +4,12 @@ RSpec.describe UserPurchase, type: :model do
   describe '#create' do
     describe '商品購入情報の保存' do
       before do
-        @user_purchase = FactoryBot.build(:user_purchase)
+        @item = FactoryBot.build(:item)
+        @item.save
+        @user = FactoryBot.build(:user)
+        @user.save
+        @user_purchase = FactoryBot.build(:user_purchase, item_id: @item.id, user_id: @user.id) # カラム名: 変数
+        sleep(1)
       end
       context '内容に問題ない場合' do
         it '全て正常' do
