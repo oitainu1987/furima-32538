@@ -1,5 +1,9 @@
 class PurchaseRecordsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_item
+  before_action :move_to_root
+  before_action :sold_out_item
+  
   def index
     @user_purchase = UserPurchase.new
   end
@@ -33,6 +37,14 @@ class PurchaseRecordsController < ApplicationController
       card: user_params[:token], #カードトークン
       currency: 'jpy' #通過の種類（日本円）
     )
+  end
+
+  def move_to_root
+    redirect_to root_path if current_user.id == @item.user_id
+  end
+
+  def sold_out_item
+    redirect_to root_path if @item.purchase_record.present?
   end
 
 end
